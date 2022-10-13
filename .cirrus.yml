@@ -1,0 +1,18 @@
+env:
+  CIRRUS_CLONE_DEPTH: "1"
+  TELEGRAM_CHAT: "ENCRYPTED[7d9599df9cc3ff7e2cf0223ec1ae65f16d3b2143cd6249785181c60d4ed0dbdd5696456f23909b2861237df9534c038d]"
+  TELEGRAM_TOKEN: "ENCRYPTED[6808522ba205870d209ac0fb511aa416007ed0575cdcd3f684f6f1ecffc955f16c49448e54723730b3c70a1c84c035d7]"
+
+kernel_task:
+  name: kernel build
+  trigger_type: manual
+  timeout_in: 30m
+  container:
+    image: renayura/archlinux:latest
+    cpu: 8
+    memory: 20G
+  build_script:
+    - git clone --depth=1 https://github.com/AthenaPrjk/kernel_xiaomi_mt6768 kernel
+    - cd kernel
+    - wget https://raw.githubusercontent.com/Renayura/Scripts/master/kernel-build.sh
+    - bash kernel-build.sh gcc
